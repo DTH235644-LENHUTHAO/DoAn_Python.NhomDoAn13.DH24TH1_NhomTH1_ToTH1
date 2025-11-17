@@ -30,7 +30,7 @@ def connect_db():
         messagebox.showerror("Lỗi Kết Nối", f"Không thể kết nối CSDL.\n{e}")
         
 def close_db():
-    """Đóng con trỏ và kết nối CSDL nếu chúng đang mở."""
+    """Đóng con trỏ và kết nối CSDL."""
     global conn, cursor
     
     if cursor is not None:
