@@ -8,11 +8,11 @@ import formThemMonHoc as mh
 import csv 
 from tkinter import filedialog 
 
-# Biến toàn cục cho widgets và data maps
+
 tree = None
 cbHS = None # Combobox cho Tên HS
 cbMH = None # Combobox cho Tên MH
-# Không cần dictionary vì sẽ tra cứu Mã khi CRUD
+
 
 
 # ====== Hàm canh giữa cửa sổ ======
@@ -105,7 +105,7 @@ def start_Diem(menu_window, user_role):
     old_MaHS = StringVar()
     old_MaMH = StringVar()
 
-    # ====== HÀM TÍNH TOÁN (Dựa trên dữ liệu SQL mẫu của bạn) ======
+
     def calculate_tbm(tx, gk, ck):
         """Tính TBM theo công thức có trọng số: (TX*1 + GK*2 + CK*3) / 6"""
         try:
@@ -160,7 +160,7 @@ def start_Diem(menu_window, user_role):
             
             tree.delete(*tree.get_children())
             for r in rows:
-                # Hiển thị Tên trong Treeview (Vẫn cần giữ Mã trong Treeview cho item_selected)
+                
                 # Dữ liệu: MãHS, TênHS, MãMH, TênMH, TX, GK, CK, TBM
                 tree.insert('', 'end', values=(r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7]))
         except Exception as e:
@@ -265,7 +265,7 @@ def start_Diem(menu_window, user_role):
             return
 
         try:
-            # SQL INSERT mới: (MaHS, MaMH) là Khóa chính, thêm 4 cột điểm
+           
             sql = "INSERT INTO DIEM (MaHS, MaMH, ThuongXuyen, Giuaki, Cuoiki, TBM) VALUES (?, ?, ?, ?, ?, ?)"
             db.cursor.execute(sql, (mhs, mmh, tx, gk, ck, tbm))
             db.conn.commit()
@@ -313,7 +313,7 @@ def start_Diem(menu_window, user_role):
                 return
 
         try:
-            # SQL UPDATE mới: Cập nhật 4 cột điểm và có thể cập nhật MaHS/MaMH nếu khóa chính thay đổi
+            
             sql = """
             UPDATE DIEM 
             SET MaHS = ?, MaMH = ?, ThuongXuyen = ?, Giuaki = ?, Cuoiki = ?, TBM = ?
@@ -365,7 +365,7 @@ def start_Diem(menu_window, user_role):
     
     root.grid_columnconfigure((0, 9), weight=1) 
     
-    # Khu vực Combobox
+    
     frame_cb = Frame(root)
     frame_cb.grid(row=1, column=1, columnspan=2, sticky='w', padx=10)
     
@@ -385,7 +385,6 @@ def start_Diem(menu_window, user_role):
                          fg="white", width=11)
     btn_them_mh.pack(side=LEFT, padx=10)
     
-    # Khu vực Điểm (Row 3 & 4 cũ được gộp và mở rộng)
     
     frame_scores = Frame(root)
     frame_scores.grid(row=3, column=1, columnspan=6, sticky='w', pady=10)
@@ -409,7 +408,7 @@ def start_Diem(menu_window, user_role):
 
     # ======= Nút chức năng (Phân quyền) =======
     frameButton = Frame(root)
-    # Tăng row number để tránh chồng lấn với frame_scores
+    
     frameButton.grid(row=6, column=0, columnspan=10, pady=15) 
     
     Button(frameButton, text="Reset", command=NhapMoi_Click, bg="#2196F3", fg="white", width=10).pack(side=LEFT, padx=10)
@@ -467,7 +466,7 @@ def start_Diem(menu_window, user_role):
     tree.heading("TBM", text="TBM")
     tree.column("TBM", width=80, anchor=CENTER)
 
-    # Thay đổi vị trí Treeview (row 7 -> row 7)
+    
     tree.grid(row=7, column=0, columnspan=10, padx=10, pady=10, sticky='nsew')
 
     # Thanh cuộn
@@ -487,6 +486,6 @@ def start_Diem(menu_window, user_role):
     root.grid_columnconfigure((0, 9), weight=1)
     
     # ======= KẾT NỐI & TẢI DỮ LIỆU =======
-    db.connect_db() # Đảm bảo connect_db() được gọi
+    db.connect_db() 
     load_combobox_data()
     load_scores()

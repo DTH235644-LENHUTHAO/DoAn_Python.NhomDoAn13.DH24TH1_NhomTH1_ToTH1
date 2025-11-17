@@ -52,7 +52,6 @@ def start_GiaoVien(menu_root=None):
     def load_data():
         """Tải danh sách GVCN từ CSDL lên Treeview."""
         try:
-            # SỬ DỤNG N'...' ĐỂ XỬ LÝ DỮ LIỆU UNICODE/TIẾNG VIỆT CHO TÊN BẢNG/CỘT NẾU CẦN
             sql = "SELECT MaGVCN, TenGiaoVien, DienThoai, Email FROM GVCN"
             db.cursor.execute(sql)
             rows = db.cursor.fetchall()
@@ -108,7 +107,6 @@ def start_GiaoVien(menu_root=None):
             return
             
         try:
-            # Cho phép sửa cả mã, nhưng dùng mã cũ để xác định bản ghi
             sql = "UPDATE GVCN SET MaGVCN=?, TenGiaoVien=?, DienThoai=?, Email=? WHERE MaGVCN=?"
             db.cursor.execute(sql, (ma, ten, dt, mail, ma_old))
             db.conn.commit()
@@ -184,7 +182,6 @@ def start_GiaoVien(menu_root=None):
     # === Nút quay lại ===
     def quay_lai():
         root.destroy()
-        # Giả định form học sinh có thể mở lại
         lh.start_Lop(menu_root, mn.menu_vaitro)
 
     # ======= Các nút chức năng =======

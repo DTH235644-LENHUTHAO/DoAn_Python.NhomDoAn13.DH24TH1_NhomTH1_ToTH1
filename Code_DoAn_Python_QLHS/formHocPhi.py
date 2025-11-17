@@ -75,7 +75,7 @@ def export_to_csv():
 
 def calculate_conno_and_status(hocphi, dadong):
     """Tính toán còn nợ và trạng thái, trả về (conno, trangthai)."""
-    # Loại bỏ dấu phẩy khỏi string trước khi chuyển sang float
+    
     if isinstance(hocphi, str): hocphi = hocphi.replace(',', '')
     if isinstance(dadong, str): dadong = dadong.replace(',', '')
     
@@ -155,11 +155,6 @@ def start_HP(menu_window, user_role):
             
             tree.delete(*tree.get_children())
             for r in rows:
-                # Dùng dữ liệu trực tiếp từ CSDL (r[1]: HocPhi, r[2]: DaDong, r[3]: ConNo, r[4]: TrangThai)
-                
-                # Tính toán lại (để kiểm tra nhất quán nếu cần), nhưng hiển thị dữ liệu từ CSDL
-                # conno_val, trangthai_val = calculate_conno_and_status(r[1], r[2])
-                
                 tree.insert('', 'end', values=(
                     r[0], # MaHP
                     r[5], # MaHS
@@ -231,7 +226,6 @@ def start_HP(menu_window, user_role):
         values = tree.item(selected, 'values')
         if not values: return
             
-        # 0: MaHP, 1: MaHS, 2: HoTenHS, 3: HocPhi (định dạng), 4: DaDong (định dạng), 5: ConNo (định dạng), 6: TrangThai
         
         stringMaHP.set(values[0])
         stringMaHS.set(values[1])

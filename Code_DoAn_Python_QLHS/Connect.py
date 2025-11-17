@@ -4,16 +4,14 @@ import pyodbc
 from tkinter import ttk
 
 #Thiet lâp ket nối
-SERVER_NAME = 'LAPTOP-GHON1NSC\MSSQLSERVER01' # Ví dụ: (local) hoặc TEN_MAY_CUA_BAN\SQLEXPRESS
-DATABASE_NAME = 'QuanLyHocSinh' # Ví dụ: QuanLySinhVien
+SERVER_NAME = 'LAPTOP-GHON1NSC\MSSQLSERVER01' 
+DATABASE_NAME = 'QuanLyHocSinh' 
 
-# Tùy chọn: Dùng Xác thực Windows (Trusted Connection)
-# HOẶC dùng Xác thực SQL Server (UID/PWD)
 CONNECTION_STRING = (
     f'Driver={{ODBC Driver 17 for SQL Server}};'
     f'Server={SERVER_NAME};'
     f'Database={DATABASE_NAME};'
-    f'Trusted_Connection=yes;' # Hoặc bỏ dòng này và thêm 'Uid=user_name;Pwd=password;'
+    f'Trusted_Connection=yes;' 
 )
 
 conn = None
@@ -35,7 +33,6 @@ def close_db():
     """Đóng con trỏ và kết nối CSDL nếu chúng đang mở."""
     global conn, cursor
     
-    # Đóng con trỏ trước
     if cursor is not None:
         try:
             cursor.close()

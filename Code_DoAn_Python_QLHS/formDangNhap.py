@@ -21,45 +21,38 @@ def login_system():
     password = stringMK.get()
 
     
-    # 1. Kiểm tra kết nối CSDL
+    # Kiểm tra kết nối CSDL
     if db.conn is None or db.cursor is None:
         db.connect_db() # Thử kết nối lại
         if db.conn is None:
             messagebox.showerror("Lỗi", "Không thể kết nối CSDL. Vui lòng kiểm tra lại.")
             return
 
-    # 2. Kiểm tra dữ liệu nhập vào
+    # Kiểm tra dữ liệu nhập vào
     if not user_id or not password:
         messagebox.showwarning("Cảnh báo", "Vui lòng nhập đầy đủ UserID và Mật khẩu.")
         return
 
     try:
-        # 3. Thực hiện truy vấn kiểm tra tài khoản
-        # Sử dụng tham số (?) để ngăn chặn lỗi SQL Injection
+        
         sql = "SELECT VaiTro FROM NGUOIDUNG WHERE UserID = ? AND MatKhau = ?"
         db.cursor.execute(sql, (user_id, password))
         
-        # Lấy kết quả (chỉ cần lấy 1 dòng)
+        # Lấy kết quả 
         result = db.cursor.fetchone()
 
         #count=result[0] if result else 0
-
         if result:
             vaitro = result[0]  # Lưu vai trò người dùng vào biến toàn cục trong formMeNu
-            # ĐĂNG NHẬP THÀNH CÔNG
             messagebox.showinfo("Thành công", f"Đăng nhập thành công! Chào mừng {user_id} với vai trò {vaitro}.")
             
-            # --- CHUYỂN ĐẾN FORM KHÁC TẠI ĐÂY ---
             root.withdraw()  # Ẩn form đăng nhập
-            # Ví dụ: đóng form đăng nhập và mở form chính
             mn.create_main_menu_manual(root, vaitro)
             #hs.start_HS()
             stringUserID.set("")  # Xóa dữ liệu sau khi đăng nhập thành công
             stringMK.set("")  # Xóa mật khẩu
-            # open_main_form(vaitro) # Gọi hàm mở cửa sổ chính
         
         else:
-            # ĐĂNG NHẬP THẤT BẠI
             messagebox.showerror("Lỗi", "UserID hoặc Mật khẩu không chính xác.")
 
     except Exception as e:
@@ -74,23 +67,20 @@ root.title("ĐĂNG NHẬP HỆ THỐNG")
 root.minsize(500, 350)
 root.resizable(height=True, width=True) 
 center_window(root, 500, 350)
-# --- Tạo Frame chính cho nội dung để dễ dàng căn giữa ---
+# --- Tạo Frame chính cho nội dung ---
 main_frame = Frame(root, padx=20, pady=20)
 main_frame.pack(expand=True, fill='both') # Căn giữa và lấp đầy root
 
-# Tạo hình nền
-    # THAY ĐỔI ĐƯỜNG DẪN NÀY
 # --- Tiêu đề ---
 Label(main_frame,
       text="ĐĂNG NHẬP HỆ THỐNG",
-      fg="#0A6847", # Màu xanh lá đậm hoặc màu bạn thích
+      fg="#0A6847", 
       font=("Times New Roman", 24, "bold"),
       pady=15
       ).grid(row=0, column=0, columnspan=2, sticky="nsew")
 
 # --- Form Đăng nhập ---
-# Cột 0 là Label (căn phải) | Cột 1 là Entry (căn trái/lấp đầy)
-# Cấu hình grid column để Entry có thể giãn rộng hơn
+
 main_frame.grid_columnconfigure(0, weight=1)
 main_frame.grid_columnconfigure(1, weight=3)
 

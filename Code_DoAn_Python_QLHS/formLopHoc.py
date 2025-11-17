@@ -32,19 +32,18 @@ def start_Lop(menu_window, user_role):
     center_window(root, 1000, 500)
     menu_window.withdraw()
 
-    # ======= Biến giao diện & Khóa chính cũ =======
+    # ======= Biến giao diện =======
     stringMaLop = StringVar()
     stringTenLop = StringVar()
     stringKhoi = StringVar()
-    stringTenGVCN = StringVar()  # Lưu TÊN GVCN (Chọn trên Combobox)
-
-    # Biến tạm giữ Khóa chính cũ khi sửa/xóa
+    stringTenGVCN = StringVar()  
+    # Biến tạm giữ Khóa chính cũ
     old_MaLop = StringVar()
 
     # Danh sách các lựa chọn Khối
     khoi_options = ["10", "11", "12"]
 
-    # ======= HÀM HỖ TRỢ CSDL VÀ RESET =======
+    # ==============
 
     def get_ma_from_ten(ten, ten_col, ma_col, table):
         """Hàm tra cứu Mã từ Tên (Ví dụ: TenGiaoVien -> MaGVCN)."""
@@ -64,12 +63,10 @@ def start_Lop(menu_window, user_role):
     def load_combobox_data():
         """Tải danh sách Khối và Tên GVCN vào Combobox."""
         try:
-            # 1. Tải Tên Giáo Viên Chủ Nhiệm (GVCN)
-            # Giả định bảng GVCN có MaGVCN và TenGiaoVien
+            
             db.cursor.execute("SELECT TenGiaoVien FROM GVCN ORDER BY TenGiaoVien")
             cbGVCN['values'] = [row[0] for row in db.cursor.fetchall()]
 
-            # 2. Khối (Đã được định nghĩa cứng trong khoi_options)
             cbKhoi['values'] = khoi_options
         except Exception as e:
             messagebox.showerror("Lỗi", f"Lỗi tải combobox: {e}")
@@ -278,7 +275,7 @@ def start_Lop(menu_window, user_role):
     cbKhoi.grid(row=3, column=2, sticky='w')
     cbKhoi.set(khoi_options[0])
 
-    # Row 4: Tên GVCN (Sử dụng Frame để nhóm Combobox và Button)
+    # Row 4: Tên GVCN 
     Label(root, text="Tên GVCN:", font=("Times New Roman", 13)).grid(row=4, column=1, sticky='e', padx=10, pady=5)
 
     frame_gvcn = Frame(root)
@@ -317,11 +314,10 @@ def start_Lop(menu_window, user_role):
 
     # ======= Bảng dữ liệu (Treeview) =======
 
-    # Cập nhật danh sách 7 cột
     columns = ("MaLop", "TenLop", "Khoi", "MaGVCN", "TenGiaoVien", "DienThoai", "Email")
     tree = ttk.Treeview(root, columns=columns, show="headings", height=10)
 
-    # Cấu hình cột hiển thị (điều chỉnh width để chứa thêm thông tin)
+    # Cột hiển thị
     tree.heading("MaLop", text="Mã Lớp")
     tree.column("MaLop", width=80, anchor=CENTER)
     tree.heading("TenLop", text="Tên Lớp")
@@ -333,11 +329,9 @@ def start_Lop(menu_window, user_role):
     tree.heading("TenGiaoVien", text="Tên GVCN")
     tree.column("TenGiaoVien", width=150, anchor='w')
     
-    # Cột mới 1: Điện Thoại
     tree.heading("DienThoai", text="Điện Thoại GVCN")
     tree.column("DienThoai", width=120, anchor=CENTER) 
     
-    # Cột mới 2: Email
     tree.heading("Email", text="Email GVCN")
     tree.column("Email", width=200, anchor='w') 
 
@@ -350,14 +344,14 @@ def start_Lop(menu_window, user_role):
     scroll_y.grid(row=7, column=7, sticky='ns') # Thay đổi column
     scroll_x.grid(row=8, column=0, columnspan=7, sticky='ew') # Thay đổi columnspan
 
-    # Liên kết sự kiện click chuột
+    # sự kiện click chuột
     tree.bind('<<TreeviewSelect>>', item_selected)
 
     root.protocol("WM_DELETE_WINDOW", close_Lop_form)
 
-    # Cấu hình cho Treeview giãn nở
+    # cho Treeview giãn nở
     root.grid_rowconfigure(7, weight=1)
-    root.grid_columnconfigure(2, weight=1)  # Cột 2 chứa inputs và treeview cần giãn nở
+    root.grid_columnconfigure(2, weight=1)
 
     # ======= KẾT NỐI & TẢI DỮ LIỆU =======
     db.connect_db()
