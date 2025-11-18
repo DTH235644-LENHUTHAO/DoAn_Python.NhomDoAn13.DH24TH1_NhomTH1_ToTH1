@@ -159,9 +159,9 @@ def start_HP(menu_window, user_role):
                     r[0], # MaHP
                     r[5], # MaHS
                     r[6], # HoTenHS
-                    f"{r[1]:.2f}", # HocPhi
-                    f"{r[2]:.2f}", # DaDong
-                    f"{r[3]:.2f}", # ConNo
+                    f"{r[1]:,.2f}", # HocPhi
+                    f"{r[2]:,.2f}", # DaDong
+                    f"{r[3]:,.2f}", # ConNo
                     r[4]           # TrangThai
                 ))
         except Exception as e:
@@ -230,8 +230,9 @@ def start_HP(menu_window, user_role):
         stringMaHP.set(values[0])
         stringMaHS.set(values[1])
         stringTenHS.set(values[2])
-        stringHocPhi.set(values[3].replace(',', ''))
-        stringDaDong.set(values[4].replace(',', ''))
+        stringHocPhi.set(values[3])
+        stringDaDong.set(values[4])
+        '''stringDaDong.set(values[4].replace(',', ''))'''
         stringConNo.set(values[5])
         stringTrangThai.set(values[6])
         

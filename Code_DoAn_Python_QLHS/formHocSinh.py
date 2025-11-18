@@ -18,6 +18,7 @@ def center_window(win, w=1200, h=600):
 def start_HS(menu_window, vaitro):
     root = Toplevel(menu_window)
     root.title("Quản Lý Học Sinh")
+    #root.state('zoomed') toàn màn hình
     root.minsize(1200, 600)
 
     center_window(root, 1200, 600)

@@ -259,7 +259,7 @@ def start_Lop(menu_window, user_role):
     Label(root, text="QUẢN LÝ LỚP HỌC", fg="red", font=("Times New Roman", 
                                         20, "bold")).grid(row=0, column=0, columnspan=7, pady=20) # Thay đổi columnspan
 
-    root.grid_columnconfigure((0, 6), weight=1)  # Căn giữa nội dung, cột 6 là cột cuối cùng của nội dung
+    root.grid_columnconfigure((0, 6), weight=1)
 
     # Row 1: Mã Lớp
     Label(root, text="Mã lớp:", font=("Times New Roman", 13)).grid(row=1, column=1, sticky='e', padx=10, pady=5)
