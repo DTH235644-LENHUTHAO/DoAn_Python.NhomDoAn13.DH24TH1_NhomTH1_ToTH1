@@ -162,9 +162,9 @@ INSERT INTO HOCPHI (MaHP, HocPhi, DaDong, ConNo, TrangThai, MaHS) VALUES
 (N'HP007', 5500000.00, 0.00, 5500000.00, N'Chưa đóng', N'HS007');
 
 INSERT INTO NGUOIDUNG (UserID,MatKhau,VaiTro) VALUES
-(N'ID1111', '111111','Admin'),
-(N'ID1234', '222222','User'),
-(N'ID1235', '333333','User');
+(N'ID1111', '1111','Admin'),
+(N'ID2222', '2222','User'),
+(N'ID3333', '3333','User');
 
 SELECT * FROM NGUOIDUNG;
 SELECT * FROM HOCSINH;
