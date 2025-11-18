@@ -179,6 +179,6 @@ def create_main_menu_manual(master_root,vaitro):
 
 # Nếu bạn chạy file này độc lập để test
 if __name__ == '__main__':
-
+    
     create_main_menu_manual()
     

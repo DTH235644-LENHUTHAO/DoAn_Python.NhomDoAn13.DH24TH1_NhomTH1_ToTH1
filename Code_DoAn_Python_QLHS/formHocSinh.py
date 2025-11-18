@@ -3,9 +3,9 @@ from tkinter import messagebox, ttk
 from tkcalendar import DateEntry
 from datetime import date
 import pyodbc
-import Connect as db  
-import formMeNu as mn  
-import formThemDiaChi as dc  
+import Connect as db  # file Connect.py chứa connect_db()
+import formMeNu as mn  # Giả sử bạn có formMeNu.py để quản lý menu
+import formThemDiaChi as dc  # Để mở form thêm địa chỉ
 
 # ====== Hàm canh giữa cửa sổ ======
 def center_window(win, w=1200, h=600):
@@ -18,7 +18,6 @@ def center_window(win, w=1200, h=600):
 def start_HS(menu_window, vaitro):
     root = Toplevel(menu_window)
     root.title("Quản Lý Học Sinh")
-    #root.state('zoomed') toàn màn hình
     root.minsize(1200, 600)
 
     center_window(root, 1200, 600)
