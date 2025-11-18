@@ -10,7 +10,7 @@ def center_window(win, w=600, h=300):
     win.geometry(f'{w}x{h}+{x}+{y}')
 
 def start_TimKiem(menu_window, vaitro):
-    root = Tk()
+    root = Toplevel(menu_window)
     root.title("Tìm Kiếm Học Sinh")
     center_window(root, 600, 350)
 
